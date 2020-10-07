@@ -4,8 +4,12 @@
     <string name="username">Name</string>
     <string name="LOGIN">LOGIN</string>
     <string name="LOGIN1">LOGIN</string>
+    <string name="menu_item_Afegir_incidencia">Afegir incidència</string>
+    <string name="menu_item_Llistar_incidencies">Llistar incidències</string>
+    <string name="menu_item_Eliminar_totes_les_incidencies">Eliminar totes les incidències</string>
+    <string name="menu_item_Ajuda">Ajuda</string>
 
-    <string-array name="numbers">
+    <string-array name="Lista">
         <item>Afegir incidència</item>
         <item>Llistar incidències</item>
         <item>Eliminar totes les incidències</item>
