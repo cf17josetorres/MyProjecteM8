@@ -14,66 +14,48 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
+
+    EditText username;
+    EditText password;
+    Button LOGIN;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Spinner spinner =findViewById(R.id.spinner1);
+        /*Spinner spinner =findViewById(R.id.spinner1);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Lista, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        spinner.setOnItemSelectedListener(this);*/
 
-        final Button button = findViewById(R.id.LOGIN);
+        LOGIN = findViewById(R.id.LOGIN);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
 
-        final EditText username = findViewById(R.id.username);
-        final EditText password = findViewById(R.id.password);
-        //final TextView resultat = findViewById(R.id.resultat)
-
-        button.setOnClickListener(new View.OnClickListener() {
+        LOGIN.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
-                Log.i("btn click", "El boton de login ha estat clicat");
-
-                String textPersonName = username.getText().toString();
-                String textPassword = password.getText().toString();
-
-
-                if (textPersonName.equals("admin") && textPassword.equals("admin")) {
-                    //Login ok
-                    //resultat.setText("Login ok");
-                    ArrayList<Incidencia> arrayIncidencia = new ArrayList<Incidencia>();
-                    Incidencia incidencia = new Incidencia("Fallo!", "Alta");
-
-                } else {
-                    //Login KO
-                    //resultat.setText("Login ko");
+                Users user = new Users();
+                if ((username.getText().toString().trim().equals(user.getUsername())) && (password.getText().toString().trim().equals(user.getPassword()))){
+                    gotomenu();
+                }
+                else{
+                    Snackbar.make(v, "Datos introducidos incorrectamente", Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
                 }
             }
         });
     }
 
-    public void goToMenu(View view) {
-        Intent intent = new Intent(this, MenuOpcion.class);
-        EditText editText = (EditText) findViewById(R.id.password);
-        String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
+    public void gotomenu(){
+        Intent intent = new Intent (MainActivity.this, MenuOpcion.class);
         startActivity(intent);
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }
